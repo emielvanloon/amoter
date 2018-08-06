@@ -1,0 +1,11 @@
+Package: amoter
+Type: Package
+Title: Analyse movement over terrain
+Version: 0.1.0
+Author: Emiel van Loon (e.e.vanloon@uva.nl)
+Maintainer: The package maintainer <e.e.vanloon@uva.nl>
+Description: A collection of tools to analyse movement over terrain (i.e. take differences of elevation into account).
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.0

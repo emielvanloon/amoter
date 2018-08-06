@@ -1,0 +1,44 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# amoter
+
+The goal of amoter is to provde a collection of tools that make it easy to 
+analyse (animal) movement in relation terrain shape.
+
+## Example
+
+Consider the case where you would like to know the length of an animal track
+as it moves over over the land surface. GPS measurements are accurate in the
+horizontal dimensions and don't represent elevation very wel. However for nearly
+any part of the earth accurate DEMs exist, so that we can combine the two sources
+to recreate a 3D path.
+
+```{r example}
+require(raster)
+elev <- raster(ncol=30, nrow=30,ext=extent(0,30,0,30),crs=NA)
+values(elev) <- runif(ncell(elev))*10
+p1 <- cbind( x=c(1,8,14,18,23), y=c(3,5,11,4,17))
+p2 <- cbind( x=c(1,3,4,15,21), y=c(3,12,21,24,16))
+
+#
+p1e <- eal(p1,elev)
+p2e <- eal(p2,elev)
+
+# elevation added with resampling between observation points
+p1er <- eal(p1,elev,step=1)
+p2er <- eal(p2,elev,step=1)
+```
