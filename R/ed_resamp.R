@@ -8,7 +8,11 @@
 #'
 #' @return A 3-column matrix with in the first two columns x and y coordinates
 #' of the equidistant points and in the third columns an integer which specifies
-#' in which line-segment of co each point falls.
+#' in which line-segment of co each point falls. The end-point of each line
+#' segment is also the starting point of the subsequent line segment, and
+#' and a choice has been made to number these points by the id of the
+#' new segment. To keep this pattern consistent, the very last point of the
+#' trajectory has a new id
 #' @import stats
 #' @examples
 #' co <- cbind(x=c(1,3,7,8,5),y=c(12,7,6,10,14))
@@ -56,15 +60,15 @@ ed_resamp <- function(co, step=1, endpt=TRUE) {
     # check if furthest point in next segment is more than 1 step
     # away from lastpoint, if not: move on to next segment
     # this part is only relevant if endpt == FALSE
-      nextsegment <- co[c(i,i+1),]
-      rngmax <- max( distrange_pl(co=nextsegment, pt=pt_start) )
-      if((step>rngmax) & !endpt){next()}
+    nextsegment <- co[c(i,i+1),]
+    rngmax <- max( distrange_pl(co=nextsegment, pt=pt_start) )
+    if((step>rngmax) & !endpt){next()}
 
     # if the remaining distance on the last line segment is smaller than
     # step, new starting x-value on the new segment is determined
     if(xpart){
-     # print(nextsegment)
-     # print(xi_start)
+      # print(nextsegment)
+      # print(xi_start)
       xi_start <- intpoint_pl(co=nextsegment, pt=pt_start, dist=step)[1]
       xpart <- FALSE
     }
@@ -79,13 +83,15 @@ ed_resamp <- function(co, step=1, endpt=TRUE) {
     xi_end <- nextsegment[2,1]
     xi <- seq(from=xi_start, to=xi_end, by=pr_xstep)
 
-    # adding the very last coordinate of track, if endpt==TRUE
-    if(i==(nrow(co)-1)){ xi <- c(xi,nextsegment[2,1])}
     coi <- approx(nextsegment, xout=xi)
 
     # add result to output
     coit <- rbind(coit, cbind(coi$x,coi$y,rep(i,length(xi))))
   }
+
+  # adding the very last coordinate of track at the end
+  coit <- rbind(coit, c(nextsegment[2,],i+1))
+
   return(coit)
 }
 

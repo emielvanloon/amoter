@@ -1,0 +1,50 @@
+#' translate output of eal to a list with points per line segment
+#'
+#' @param coi the output from the function eal: a numeric matrix with x,y,z
+#' coordinates in the first three columns and a fourth column labelled 'seg'
+#' with the ids of the line segments to which each point belongs
+#' @return a list which gives the row-ids in the output from eal
+#' that belong to each line segment.
+#' @examples
+#' require(raster)
+#' elev <- raster(ncol=30, nrow=30,ext=extent(0,30,0,30),crs=NA)
+#' values(elev) <- runif(ncell(elev))*10
+#' p1 <- cbind( x=c(1,8,14,18,23), y=c(3,5,11,4,17))
+#' p2 <- cbind( x=c(1,3,4,15,21), y=c(3,12,21,24,16))
+#'
+#'# elevation added without resampling between observation points
+#' p1e <- eal(p1,elev)
+#' p2e <- eal(p2,elev)
+#'
+#' # elevation added with resampling between observation points
+#' p1er <- eal(p1,elev,step=1)
+#' p2er <- eal(p2,elev,step=1)
+#'
+#' # the function ptseg can now take the output from eal
+#' # as input to establish which resampling points belong
+#' # to each line segment
+#'
+#' ptseg(p1e)
+#' ptseg(p2e)
+#'
+#' ptseg(p1er)
+#' ptseg(p2er)
+#' @export
+
+ptseg <- function(coi) {
+
+  pointid <- coi[,'seg']
+  pointid[length(pointid)] <- max(pointid)-1
+  idx <- unique( pointid )
+
+  selectpts <- function(x){
+    pt <- which(x==pointid)
+    mx <- (max(pt)+1)
+    if(mx < length(pointid)){
+      pt <- c(pt, mx)
+    }
+    return(pt)
+  }
+
+  lapply(idx,FUN=selectpts)
+}

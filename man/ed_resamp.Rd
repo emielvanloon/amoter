@@ -18,7 +18,11 @@ piecewise linear line have to be included}
 \value{
 A 3-column matrix with in the first two columns x and y coordinates
 of the equidistant points and in the third columns an integer which specifies
-in which line-segment of co each point falls.
+in which line-segment of co each point falls. The end-point of each line
+segment is also the starting point of the subsequent line segment, and
+and a choice has been made to number these points by the id of the
+new segment. To keep this pattern consistent, the very last point of the
+trajectory has a new id
 }
 \description{
 find x,y coordinates at equal distances along a piecewise linear line

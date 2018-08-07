@@ -20,10 +20,12 @@ segment should be kept in the resampled data (if set to TRUE, the endpoints
 are kept in the output)}
 }
 \value{
-if step is not specified: 3-column matrix with the first two columns
-identical to co, and the z in the third column, if step is specified
-a fourth column with integers is added, the integers refer to the line
-segments in co.
+a 4-column matrix with the first two columns
+identical to co, and the z in the third column, the fourth column contains
+integers which refer to the line segments in co. The end-point of each line
+segment is also the starting point of the subsequent line segment, and
+and a choice has been made to number these points by the id of the
+new segment.
 }
 \description{
 elevation along a 2D line
