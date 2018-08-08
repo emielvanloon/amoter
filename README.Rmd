@@ -44,9 +44,10 @@ p2er <- eal(p2,elev,step=1)
 ```
 ## To install this package
 
-To install this package, you should have installed the package `devtools` already 
-( ```{r} install.packages("devtools") ``` ).
-Next type: ```{r} devtools::install_github("emielvanloon/amoter") ```
+Run this at the R command prompt: `devtools::install_github("emielvanloon/amoter")`
+
+Note that this only works if you have installed the package `devtools` already. You can install devtools with: `install.packages("devtools")`
+
 
 
 
