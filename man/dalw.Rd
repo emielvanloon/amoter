@@ -38,3 +38,9 @@ dalw(p1e,2)
 dalw(p1e,3)
 
 }
+\seealso{
+\code{\link{salw}}
+}
+\author{
+Emiel van Loon, \email{e.e.vanloon@uva.nl}
+}

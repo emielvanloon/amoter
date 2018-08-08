@@ -20,3 +20,6 @@ distance along a line
 co <- cbind( x=1:5, y=c(3,5,6,4,7))
 dal(co)
 }
+\author{
+Emiel van Loon, \email{e.e.vanloon@uva.nl}
+}

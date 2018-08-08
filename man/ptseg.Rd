@@ -43,3 +43,6 @@ ptseg(p2e)
 ptseg(p1er)
 ptseg(p2er)
 }
+\author{
+Emiel van Loon, \email{e.e.vanloon@uva.nl}
+}

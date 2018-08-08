@@ -25,6 +25,8 @@
 #' dalw(p1e,2)
 #' dalw(p1e,3)
 #'
+#' @author Emiel van Loon, \email{e.e.vanloon@@uva.nl}
+#' @seealso \code{\link{salw}}
 #' @export
 
 dalw <- function(coi,d=2) {
